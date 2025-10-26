@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MGK_Counter_4J.CounterView">
+    <Border StrokeThickness="3" Padding="10" Stroke="DarkSlateGray"  
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            Margin="5">
+    <VerticalStackLayout >
+            
+            <HorizontalStackLayout
+                HorizontalOptions="FillAndExpand"
+                Spacing="10"
+                >
+                <Label x:Name="TitleLabel" Text="Counter_Title" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+                <Label HorizontalOptions="FillAndExpand"/>
+                <Button Text="x" Clicked="onDeleteCounterClicked" BackgroundColor="DarkRed"/>
+            </HorizontalStackLayout>    
+        <Label 
+                x:Name="CounterLabel"
+                Text="0"
+                FontSize="Large"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <HorizontalStackLayout
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                Spacing="20">
+                <Button 
+                    Clicked="onMinusButtonClicked"
+                    BackgroundColor="DarkCyan"
+                    Text="-" />
+                <Button 
+                    Clicked="onPlusButtonClicked"
+                    BackgroundColor="DarkCyan"
+                    Text="+" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</ContentView>
