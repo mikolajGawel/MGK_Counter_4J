@@ -21,20 +21,25 @@ public partial class CounterView : ContentView
     private void updateCounter()
     {
         CounterLabel.Text = counterValue.ToString();
-        if (File.Exists(configPath))
+        if (!File.Exists(configPath))
         {
-            var xml = XDocument.Load(configPath);
-            var counterXML = xml.Descendants("Counter").Where(e => (string)e.Attribute("name") == counterName).FirstOrDefault();
-            if (counterXML == null) {
-                var newCounter = new XElement("Counter",
-                    new XAttribute("name", counterName), new XAttribute("value", counterValue));
-                xml.Root?.Add(newCounter);
-            }
-            else {
-                counterXML.SetAttributeValue("value", counterValue);
-            }   
-            xml.Save(configPath);
+            var newXml = new XDocument(
+                new XElement("Counters")
+            );
+            newXml.Save(configPath);
         }
+       
+        var xml = XDocument.Load(configPath);
+        var counterXML = xml.Descendants("Counter").Where(e => (string)e.Attribute("name") == counterName).FirstOrDefault();
+        if (counterXML == null) {
+            var newCounter = new XElement("Counter",
+                new XAttribute("name", counterName), new XAttribute("value", counterValue));
+            xml.Root?.Add(newCounter);
+        }
+        else {
+            counterXML.SetAttributeValue("value", counterValue);
+        }   
+        xml.Save(configPath);
     }
     private void onMinusButtonClicked(object sender, EventArgs e)
     {
