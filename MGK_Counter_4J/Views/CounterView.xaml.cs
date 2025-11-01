@@ -6,22 +6,16 @@ namespace MGK_Counter_4J;
 public partial class CounterView : ContentView
 {
     public CounterViewModel CounterViewModel;
+    public event EventHandler? onDeleteRequested;
     public CounterView(string counterName,int count = 0, EventHandler? onDeleteCounter = null)
     {
         InitializeComponent();
-        CounterViewModel = new CounterViewModel(count, counterName, onDeleteCounter);
+        CounterViewModel = new CounterViewModel(count, counterName, (s,e) => {
+            onDeleteRequested?.Invoke(this, EventArgs.Empty);
+        });
         BindingContext = CounterViewModel;
-    }
-    private void onMinusButtonClicked(object sender, EventArgs e)
-    {
-    }
 
-    private void onPlusButtonClicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void onDeleteCounterClicked(object sender, EventArgs e)
-    {
+        if(onDeleteCounter != null)
+            onDeleteRequested += onDeleteCounter;
     }
 }

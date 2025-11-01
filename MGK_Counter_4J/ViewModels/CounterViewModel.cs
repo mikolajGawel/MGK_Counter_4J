@@ -32,9 +32,9 @@ namespace MGK_Counter_4J.ViewModels
             }
         }
         public string Name { get { return _counter.Name; } }
-        public ICommand IncreaseValue;
-        public ICommand DecreaseValue;
-        public ICommand DeleteCounter;
+        public ICommand IncreaseValue { get; }
+        public ICommand DecreaseValue { get; }
+        public ICommand DeleteCounter { get; }
 
         public CounterViewModel(int value,string name,EventHandler onDeleteRequested)
         {
@@ -46,6 +46,7 @@ namespace MGK_Counter_4J.ViewModels
                 _counter.Delete();
                 onDeleteRequested.Invoke(this, EventArgs.Empty); 
             });
+            _counter.Save();
         }
 
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null)

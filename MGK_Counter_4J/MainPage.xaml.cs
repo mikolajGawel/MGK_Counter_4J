@@ -36,6 +36,7 @@ namespace MGK_Counter_4J
 
             if (string.IsNullOrWhiteSpace(result) || counterViews.Find(e => e.CounterViewModel.Name == result) != null)
             {
+                await DisplayAlert("Error", "Counter name can't be empty", "OK");
                 return;
             }
 
@@ -43,6 +44,7 @@ namespace MGK_Counter_4J
 
             if (string.IsNullOrWhiteSpace(value))
             {
+                await DisplayAlert("Error", "Value cant be null", "OK");
                 return;
             }
             if(!int.TryParse(value, out _))
