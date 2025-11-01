@@ -34,7 +34,7 @@ namespace MGK_Counter_4J
         {
             var result = await DisplayPromptAsync("Add Counter", "Counter Name:");
 
-            if (string.IsNullOrWhiteSpace(result) || counterViews.Find(e => e.counterName == result) != null)
+            if (string.IsNullOrWhiteSpace(result) || counterViews.Find(e => e.CounterViewModel.Name == result) != null)
             {
                 return;
             }
@@ -67,7 +67,7 @@ namespace MGK_Counter_4J
                 {
                     var doc = XDocument.Load(filePath);
                     var counterElement = doc.Descendants("Counter")
-                        .FirstOrDefault(c => c.Attribute("name")?.Value == counterView.counterName);
+                        .FirstOrDefault(c => c.Attribute("name")?.Value == counterView.CounterViewModel.Name);
                     if(counterElement != null)
                     {
                         counterElement.Remove();

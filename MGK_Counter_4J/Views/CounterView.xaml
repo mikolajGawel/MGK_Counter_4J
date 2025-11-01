@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MGK_Counter_4J.CounterView">
+             xmlns:local="clr-namespace:MGK_Counter_4J.ViewModels"
+             x:Class="MGK_Counter_4J.CounterView"
+             x:DataType="local:CounterViewModel">
     <Border StrokeThickness="3" Padding="10" Stroke="DarkSlateGray"  
             VerticalOptions="Center" 
             HorizontalOptions="Center"
@@ -12,13 +14,13 @@
                 HorizontalOptions="FillAndExpand"
                 Spacing="10"
                 >
-                <Label x:Name="TitleLabel" Text="Counter_Title" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="TitleLabel" Text="{Binding Name}" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
                 <Label HorizontalOptions="FillAndExpand"/>
-                <Button Text="x" Clicked="onDeleteCounterClicked" BackgroundColor="DarkRed"/>
+                <Button Text="x" Command="{Binding DeleteCounter}" BackgroundColor="DarkRed"/>
             </HorizontalStackLayout>    
         <Label 
                 x:Name="CounterLabel"
-                Text="0"
+                Text="{Binding Value}"
                 FontSize="Large"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
@@ -27,11 +29,11 @@
                 HorizontalOptions="Center"
                 Spacing="20">
                 <Button 
-                    Clicked="onMinusButtonClicked"
+                    Command="{Binding DecreaseValue}"
                     BackgroundColor="DarkCyan"
                     Text="-" />
                 <Button 
-                    Clicked="onPlusButtonClicked"
+                    Command="{Binding IncreaseValue}"
                     BackgroundColor="DarkCyan"
                     Text="+" />
             </HorizontalStackLayout>
